@@ -4,20 +4,44 @@ class App extends React.Component {
 
     this.state = {
 
-      currentVideo: this.props.videos === undefined ? window.exampleVideoData[0] : this.props.videos[0],
-      videoList: this.props.videos === undefined ? window.exampleVideoData : this.props.videos
+      currentVideo: window.exampleVideoData[0],
+      videoList: window.exampleVideoData 
     }
-     this.changeCurrentVideo = this.changeCurrentVideo.bind(this)
+    this.changeCurrentVideo = this.changeCurrentVideo.bind(this)
+    this.retrieveData = this.retrieveData.bind(this)
+
   }
 
+  changeSearchData (query) {
+    var options = {
+      key: window.YOUTUBE_API_KEY,
+      q: query
+    }
+    this.props.searchYouTube(options, this.retrieveData)
+  }
 
+  componentDidMount () {
+    var options = {
+      key: window.YOUTUBE_API_KEY,
+      q: 'puppies'
+    }
+    this.props.searchYouTube(options, this.retrieveData)
+  }
+
+  retrieveData(data) {
+    this.setState({
+      currentVideo: data.items[0],
+      videoList: data.items
+      })
+    console.log(data.items)
+  }
   changeCurrentVideo(props) {
     this.setState({currentVideo: props})
   }
   render() {
     return(
       <div>
-        <Nav />
+        <Nav changeSearchData={this.changeSearchData.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>

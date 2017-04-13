@@ -1,7 +1,7 @@
-var Nav = () => (
+var Nav = ({changeSearchData}) => (
   <nav className="navbar">
     <div className="col-md-6 col-md-offset-3">
-      <Search />
+      <Search changeSearchData={changeSearchData}/>
     </div>
   </nav>
 );
