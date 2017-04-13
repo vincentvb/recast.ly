@@ -4,25 +4,25 @@ class App extends React.Component {
 
     this.state = {
 
-      currentVideo: this.props.videos === undefined ? window.exampleVideoData[0] || this.props.videos[0],
-      videoList: this.props.videos === undefined ? window.exampleVideoData[0] || this.props.videos[0]
+      currentVideo: this.props.videos === undefined ? window.exampleVideoData[0] : this.props.videos[0],
+      videoList: this.props.videos === undefined ? window.exampleVideoData : this.props.videos
     }
-    console.log(this.state.currentVideo)
+     this.changeCurrentVideo = this.changeCurrentVideo.bind(this)
   }
 
 
-  changeCurrentVideo(newVideo) {
-    this.setState({currentVideo: newVideo})
+  changeCurrentVideo(props) {
+    this.setState({currentVideo: props})
   }
   render() {
     return(
       <div>
         <Nav />
         <div className="col-md-7">
-          <VideoPlayer video={this.state.currentVideo} state={this.state}/>
+          <VideoPlayer video={this.state.currentVideo}/>
         </div>
         <div className="col-md-5">
-          <VideoList videos={this.state.videoList} state={this.state}/>
+          <VideoList videos={this.state.videoList} changeVideo={this.changeCurrentVideo}/>
         </div>
       </div>
     )

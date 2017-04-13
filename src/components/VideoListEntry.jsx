@@ -1,13 +1,18 @@
-var VideoListEntry = (props) => (
-  <div className="video-list-entry">
-    <div className="media-left media-middle">
-      <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt="" />
+var VideoListEntry = (props) =>
+  // changeVideo = function() {
+
+  // }
+
+  (
+    <div className="video-list-entry">
+      <div className="media-left media-middle">
+        <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt="" />
+      </div>
+      <div className="media-body">
+        <div className="video-list-entry-title" onClick={() => {props.changeVideo(props.video)}}>{props.video.snippet.title}</div>
+        <div className="video-list-entry-detail">{props.video.snippet.description}</div>
+      </div>
     </div>
-    <div className="media-body">
-      <div className="video-list-entry-title" onClick={() => {console.log("hey")}}>{props.video.snippet.title}</div>
-      <div className="video-list-entry-detail">{props.video.snippet.description}</div>
-    </div>
-  </div>
 );
 
 // PropTypes tell other developers what `props` a component expects
